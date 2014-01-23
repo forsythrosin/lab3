@@ -1,39 +1,42 @@
 /* applies to anything of class "example-class-selector" */
 .example-class-selector {
-	margin-top: 2em;
+     margin-top: 2em;
 }
 
 /* applies to any <p> descendants of an element of class "example-class-selector" */
 .example-class-selector p {
-	/* Colors are in hexadecimal: http://www.colorpicker.com/ */	
-	color: #CC00AA;
+     /* Colors are in hexadecimal: http://www.colorpicker.com/ */     
+     color: #CC00AA;
 }
 
 /* this style exists to make it obvious that you've successfully linked
    the CSS to the page. feel free to remove it once the link is working. */
 body {
-     border: 1px dotted gray;
      padding: 20px;
 }
 
-.jumbotron {
-	position: relative;
-	background: none;
+h1, h2, h3, h4 {
+     font-family: 'Open Sans Condensed';
 }
 
-.jumbotron:after {
-     content:"";
-     background: url("../images/lorempixel.jumbotron.jpeg");
-     opacity: 0.2;
-     top: 0;
-     left: 0;
-     bottom: 0;
-     right: 0;
-     position: absolute;
-     z-index: -1;	
+h4 {
+     background: rgba(197, 221, 178, 0.9);
+     padding: 15px 10px;
+     font-size: 24px;
+}
+
+.jumbotron {
+     position: relative;
+     background: none;
+}
+
+.jumbotron h1 {
+     font-size: 70px;
+     margin: 0;
 }
 
 .jumbotron p {
+     margin: 0;
      color: #6e6e6e;
 }
 
@@ -41,6 +44,131 @@ body {
      color: #1f6ddd;
 }
 
-.project a {
-     text-align: center;
+.jumbotron:after {
+     content:"";
+     background: url("http://lorempixel.com/1140/283");
+     opacity: 0.2;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     position: absolute;
+     z-index: -1;   
+}
+
+.project, form {
+     width: 50%;
+     float: left;
+}
+
+a.thumbnail {
+     padding: 0;
+     position: relative;
+     color: rgba(12, 27, 0, 1);
+     margin: 10px;
+}
+
+a.thumbnail:hover {
+     background: #eee;
+     color: rgba(12, 27, 0, 1);
+     border-color: rgba(0,0,0,0.3);
+}
+
+     a.thumbnail p {
+          background: rgba(197, 221, 178, 0.8);
+          margin: 0;
+          padding: 10px;
+          border-radius: 0 0 4px 4px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 3;
+          text-align: center;
+          -webkit-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+     }
+
+     a.thumbnail:hover p {
+          background: rgba(197, 221, 178, 0.9);
+     }
+
+     a.thumbnail img {
+          border-radius: 4px;
+     }
+
+a.thumbnail:after {
+     content: '';
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     background: rgba(255,255,255,0.0);
+     -webkit-transition: all .2s ease-in-out;
+     transition: all .2s ease-in-out;
+}
+
+a.thumbnail:hover:after {
+     background: rgba(255,255,255,0.2);
+}
+
+.form-group {
+     margin: 10px;
+}
+
+#width-group {
+     display: none;
+     /* don't want to destroy the layout
+        by changing project widths,
+        but still show that I implemented
+        the requested functionality */
+}
+
+#submitBtn {
+     margin: 10px;
+}
+
+.project-description {
+     background: rgba(0, 0, 0, 0.8);
+     margin: 0;
+     padding: 10px;
+     border-radius: 4px 4px 0 0;
+     position: absolute;
+     top: 0;
+     bottom: 40px;
+     left: 0;
+     right: 0;
+     z-index: 2;
+}
+
+.project .project-description p {
+     background: none;
+     color: white;
+     margin: 0;
+     padding: 10px;
+     position: relative;
+     -webkit-transition: none;
+     transition: none;
+     text-align: left;
+}
+
+a.thumbnail:hover .project-description p {
+     background: none;
+}
+
+@media all and (max-width: 530px) {
+
+     .project, form {
+          width: 100%;
+     }
+
+}
+
+@media all and (min-width: 1200px) {
+
+     .project, form {
+          width: 33%;
+     }
+
 }

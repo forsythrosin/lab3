@@ -9,39 +9,70 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-	$("#testjs").click(function(e) {
-		$('.jumbotron h1').text("Javascript is connected");
+	$('#testjs').click(function(e) {
+		$('.jumbotron h1').text('Javascript is connected');
 		$('#testjs').text('Clicked!');
-		$(".jumbotron p").toggleClass("active");
+		$('.jumbotron p').toggleClass('active');
 	});
 
-	$("a.thumbnail").click(projectClick);
-	$("button#submitBtn").click(projectFormSubmit);
+	$('a.thumbnail').click(projectClick);
+	$('button#submitBtn').click(projectFormSubmit);
 }
 
 function projectClick(e) {
-  // Cancel the default action, which prevents the page from reloading
     e.preventDefault();
 
-    // In an event listener, $(this) is the leement that fired the event
-    var projectTitle = $(this).find("p").text();
-    var jumbotronHeader = $(".jumbotron h1");
+    /*
+    var projectTitle = $(this).find('p').text();
+    var jumbotronHeader = $('.jumbotron h1');
     jumbotronHeader.text(projectTitle);
- 	var containingProject = $(this).closest(".project");
-    var description = $(containingProject).find(".project-description");
+ 	var containingProject = $(this).closest('.project');
+    var description = $(containingProject).find('.project-description');
     if (description.length == 0) {
-       $(containingProject).append("<div class='project-description'><p>Description of the project.</p></div>");
+       $(containingProject).append('<div class="project-description"><p>Description of the project.</p></div>');
     } else {
        description.slideToggle();
     }
+    */
+    toggleDescription($(this));
 }
 
 function projectFormSubmit(e) {
 	e.preventDefault();
 
-	var projectId = $("#project").val();
-	$(projectId).animate({
-		width: $("#width").val()
-	}, 200).find(".project-description").text($("#description").val());
+	var projectId = $('#project').val(),
+		$project = $(projectId),
+		width = $('#width').val(),
+		description = $('#description').val();
+	if (width) {
+		$(projectId).animate({
+			width: width
+		}, 200);
+	}
+	//$project.find('.project-description').text(description);
+	setDescription($project.find('a'), description).slideDown();
 
+}
+
+function toggleDescription($project) {
+	var $descElement = $project.find('.project-description');
+	if ($descElement.length == 0) {
+		$descElement = setDescription($project);
+	}
+	$descElement.slideToggle();
+}
+
+function setDescription($project, description) {
+	console.log('set the description of', $project);
+	if (description === undefined) {
+		description = 'Description of the ' + $project.find('p').not('.project-description p').text() + ' project.';
+	}
+	var $descElement = $project.find('.project-description');
+	if ($descElement.length == 0) {
+		$descElement = $('<div class="project-description"></div>');
+		$descElement.hide();
+		$project.append($descElement);
+	}
+	$descElement.html('<p>' + description + '</p>');
+	return $descElement;
 }
